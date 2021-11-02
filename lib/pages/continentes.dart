@@ -1,44 +1,32 @@
+import 'package:app_plantas_aps8/components/card_continentes.dart';
+import 'package:app_plantas_aps8/models/plantasModel.dart';
 import 'package:flutter/material.dart';
 
 class Continentes extends StatelessWidget {
-  final String texto;
-
-  Continentes(this.texto);
+  List<String> continentes = ["Africa", "America", "Asia", "Europa", "Oceania"];
+  late Future<List<PlantasModel>> future;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 70,
-      width: double.infinity,
-      margin: EdgeInsets.all(15),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(105),
+    return Scaffold(
+        backgroundColor: Colors.lightGreen.shade100,
+        appBar: AppBar(
+          backgroundColor: Colors.lightGreen.shade900,
+          title: Container(
+            width: double.infinity,
+            margin: EdgeInsets.all(28),
+            child: Text(
+              "Flora Global",
+              style: TextStyle(fontSize: 28, color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+          ),
         ),
-        elevation: 10,
-        child: GestureDetector(
-            child: Container(
-                child: Padding(
-                  padding: EdgeInsets.all(15),
-                  child: Text(
-                    texto,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.pink,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ), // button text
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  image: DecorationImage(
-                      image: NetworkImage("https://placeimg.com/640/480/any"),
-                      fit: BoxFit.cover),
-                )),
-            onTap: () {
-              print(texto);
-            }),
-      ),
-    );
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: continentes
+              .map((continente) => CardContinentes(continente))
+              .toList(),
+        ));
   }
 }

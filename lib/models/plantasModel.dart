@@ -1,4 +1,4 @@
-class Plantas{
+class PlantasModel{
 
   final int numero;
   final String nome_popular;
@@ -11,10 +11,10 @@ class Plantas{
   final String altura_media;
   final String descricao;
 
-  Plantas(this.numero, this.nome_popular, this.nome_cientifico, this.luminosidade, this.origem, this.continente, this.familia, this.tipo, this.altura_media, this.descricao);
+  PlantasModel(this.numero, this.nome_popular, this.nome_cientifico, this.luminosidade, this.origem, this.continente, this.familia, this.tipo, this.altura_media, this.descricao);
 
-  factory Plantas.fromJson(Map<String, dynamic> json) {
-    return Plantas(
+  factory PlantasModel.fromJson(Map<String, dynamic> json) {
+    return PlantasModel(
       json["numero"],
       json["nome_popular"],
       json["nome_cientifico"],

@@ -64,32 +64,8 @@ class _PerguntaAppState extends State<PerguntaApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.lightGreen.shade100,
-        appBar: AppBar(
-          backgroundColor: Colors.lightGreen.shade900,
-          title: Container(
-            width: double.infinity,
-            margin: EdgeInsets.all(28),
-            child: Text(
-              "Flora Global",
-              style: TextStyle(fontSize: 28, color: Colors.white),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Continentes("Botao 1"),
-            Continentes("Botao 2"),
-            Continentes("Botao 3"),
-            Continentes("Botao 4"),
-            Continentes("Botao 5"),
-          ],
-        ),
-      ),
-    );
+      home: Continentes()
+      );
   }
 }
 
