@@ -1,5 +1,5 @@
 import 'package:app_plantas_aps8/components/card_continentes.dart';
-import 'package:app_plantas_aps8/models/plantasModel.dart';
+import 'package:app_plantas_aps8/models/plantas_model.dart';
 import 'package:flutter/material.dart';
 
 class Continentes extends StatelessWidget {
@@ -9,7 +9,7 @@ class Continentes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.lightGreen.shade100,
+        backgroundColor: Colors.grey.shade200,
         appBar: AppBar(
           backgroundColor: Colors.lightGreen.shade900,
           title: Container(
