@@ -3,32 +3,32 @@ import 'package:app_plantas_aps8/components/planta_item.dart';
 import 'package:app_plantas_aps8/models/plantas_model.dart';
 import 'package:flutter/material.dart';
 
-class PlantaListScreen extends StatefulWidget {
-  const PlantaListScreen({Key? key}) : super(key: key);
+class PlantaLista extends StatefulWidget {
+  const PlantaLista({Key? key}) : super(key: key);
 
   @override
-  State<PlantaListScreen> createState() => _PlantaListScreenState();
+  State<PlantaLista> createState() => _PlantaListaState();
 }
 
-class _PlantaListScreenState extends State<PlantaListScreen> {
+class _PlantaListaState extends State<PlantaLista> {
   bool requestError = false;
 
   late Future<List<PlantasModel>> futurePlantas;
 
-  @override
-  void initState() {
-    super.initState();
-    futurePlantas = PlantaService().buscaPlantas();
+  Future<void> futureState() async {
+    final String continente = ModalRoute.of(context)!.settings.arguments as String;
+    futurePlantas = PlantaService().buscaPlantasContinente(continente);
   }
 
   @override
   Widget build(BuildContext context) {
+    futureState();
     return Scaffold(
       appBar: AppBar(
         title: const SizedBox(
           width: double.infinity,
           child: Text(
-            'Animais',
+            'Plantas',
             style: TextStyle(
               color: Colors.white,
               fontSize: 25,
@@ -54,7 +54,7 @@ class _PlantaListScreenState extends State<PlantaListScreen> {
                     mainAxisSpacing: 10),
                 padding: const EdgeInsets.all(15.0),
                 children: snapshot.data!
-                    .map((PlantasModel) => PlantaItem(PlantasModel))
+                    .map((plantasModel) => PlantaItem(plantasModel))
                     .toList());
           }
           return const Center(

@@ -1,5 +1,6 @@
 class AppRoutes {
   static const home = "/";
-  static const plantaLista = "/plantas";
-  static const plantaInfo = "animal_info";
+  static const continentes = "/continentes";
+  static const plantaLista = "/lista_plantas";
+  static const plantaInfo = "/planta_info";
 }

@@ -1,4 +1,6 @@
 import 'package:app_plantas_aps8/pages/continentes.dart';
+import 'package:app_plantas_aps8/pages/plantas_lista.dart';
+import 'package:app_plantas_aps8/utils/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -64,7 +66,10 @@ class _PerguntaAppState extends State<PerguntaApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Continentes()
+      routes: {
+        AppRoutes.home: (context) => Continentes(),
+        AppRoutes.plantaLista: (context) => PlantaLista(),
+      },
       );
   }
 }

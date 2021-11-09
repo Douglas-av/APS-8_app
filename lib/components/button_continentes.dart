@@ -1,3 +1,4 @@
+import 'package:app_plantas_aps8/utils/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -5,6 +6,13 @@ class ButtonContinentes extends StatelessWidget {
   final String continente;
 
   ButtonContinentes(this.continente);
+
+    void _selectPlantaLista(BuildContext context, String continente) {
+    Navigator.of(context).pushNamed(
+      AppRoutes.plantaLista,
+      arguments: continente,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +39,7 @@ class ButtonContinentes extends StatelessWidget {
                   fit: BoxFit.fitHeight),
             )),
         onTap: () {
-          print(continente);
+          _selectPlantaLista(context, continente);
         });
   }
 }
