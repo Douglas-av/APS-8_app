@@ -31,6 +31,69 @@ class Home extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.5,
+              margin: EdgeInsets.all(5),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(250, 224, 199, 1)),
+                  elevation: MaterialStateProperty.all<double>(0),
+                ),
+                onPressed: () => _selectContinentes(context),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Continentes',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.5,
+              margin: EdgeInsets.all(5),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(250, 224, 199, 1)),
+                  elevation: MaterialStateProperty.all<double>(0),
+                ),
+                onPressed: () => print('Inserir plantas'),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Inserir plantas',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
