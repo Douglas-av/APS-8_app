@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 
 class PlantaItem extends StatelessWidget {
   final PlantasModel planta;
-
+  final Color borderColor = Colors.transparent;
   const PlantaItem(this.planta, {Key? key}) : super(key: key);
 
-  void _selectAnimal(BuildContext context) {
+  void _selectPlanta(BuildContext context) {
     Navigator.of(context).pushNamed(
       AppRoutes.plantaInfo,
       arguments: planta,
@@ -20,8 +20,22 @@ class PlantaItem extends StatelessWidget {
 
   List<Color> getColors() {
     List<Color> colors = [];
-    colors.add(Colors.green.withOpacity(0.5));
-    colors.add(Colors.green);
+    if (planta.tipo == 'Flor') {
+      colors.add(Colors.orange);
+    }
+    else if (planta.tipo == 'Arbustro') {
+      colors.add(Colors.green.shade700);
+    }
+    else if (planta.tipo == 'Arvore') {
+      colors.add(Colors.brown.shade900);
+    }
+    else if (planta.tipo == 'Fruta') {
+      colors.add(Colors.redAccent.shade100);
+    }
+    else {
+      colors.add(Colors.black);
+    }
+    colors.add(Colors.lightGreen.shade200.withOpacity(0.5));
     return colors;
   }
 
@@ -31,57 +45,65 @@ class PlantaItem extends StatelessWidget {
           AppConfig.apiBaseURL + '/imagem/' + planta.numero.toString()),
       height: 115,
       width: 200,
-      errorBuilder: (context, error, stackTrace) => const Icon(
-        Icons.cancel_outlined,
-        color: Colors.white,
-        size: 100.0,
-      ),
+      fit: BoxFit.cover,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        _selectAnimal(context);
-      },
-      borderRadius: BorderRadius.circular(15),
-      //splashColor: Theme.of(context).primaryColor,
-      child: Container(
-        child: Column(
-          children: [
-            Container(
-              height: 15,
-              child: Text(planta.nome_popular,
-                  style: const TextStyle(color: Colors.white, fontSize: 12)),
-            ),
-            Container(
-              child: Center(
-                child: getImage(),
+    return Scaffold(
+      backgroundColor: Colors.lightGreen.shade100,
+      body: InkWell(
+        onTap: () {
+          _selectPlanta(context);
+        },
+        borderRadius: BorderRadius.circular(15),
+        //splashColor: Theme.of(context).primaryColor,
+        child: Container(
+          child: Column(
+            children: [
+              Container(
+                height: 15,
+                child: Text(planta.nome_popular,
+                    style: const TextStyle(color: Colors.white, fontSize: 12)),
               ),
-              height: 120,
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 5),
-              decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(5.0))),
-              width: 50,
-              child: Text("#" + planta.numero.toString(),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.black)),
-            )
-          ],
-        ),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [...getColors()],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+              Container(
+                child: Center(
+                  child: getImage(),
+                ),
+                height: 120,
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 5),
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                width: 50,
+                child: Text("#" + planta.numero.toString(),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.black)),
+              )
+            ],
           ),
-          borderRadius: BorderRadius.circular(15),
+          decoration: BoxDecoration(
+            border: Border.all(color: borderColor, width: 2),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.5),
+                spreadRadius: 2.5,
+                blurRadius: 5,
+                offset: Offset(0, 1), // changes position of shadow
+              ),
+            ],
+            gradient: LinearGradient(
+              colors: [...getColors()],
+              begin: Alignment.center,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          padding: const EdgeInsets.all(5.0),
         ),
-        padding: const EdgeInsets.all(5.0),
       ),
     );
   }

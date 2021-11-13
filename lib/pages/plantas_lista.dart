@@ -24,11 +24,12 @@ class _PlantaListaState extends State<PlantaLista> {
   Widget build(BuildContext context) {
     futureState();
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         title: const SizedBox(
-          width: double.infinity,
+          width: 250,
           child: Text(
-            'Plantas',
+            'Flora',
             style: TextStyle(
               color: Colors.white,
               fontSize: 25,
@@ -36,7 +37,7 @@ class _PlantaListaState extends State<PlantaLista> {
             textAlign: TextAlign.center,
           ),
         ),
-        backgroundColor: Colors.green[400],
+        backgroundColor: Colors.lightGreen.shade900,
       ),
       body: FutureBuilder<List<PlantasModel>>(
         future: futurePlantas,

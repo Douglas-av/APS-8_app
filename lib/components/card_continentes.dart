@@ -29,7 +29,7 @@ class CardContinentes extends StatelessWidget {
           borderRadius: BorderRadius.circular(105),
         ),
         elevation: 15,
-        child: ButtonContinentes(continente),
+        child: ButtonContinentes(continente, 'assets/images/${continente}.png'),
       ),
     );
   }

@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 
 class ButtonContinentes extends StatelessWidget {
   final String continente;
+  final String pathImage;
 
-  ButtonContinentes(this.continente);
+  ButtonContinentes(this.continente, this.pathImage);
 
-    void _selectPlantaLista(BuildContext context, String continente) {
+  void _selectPlantaLista(BuildContext context, String continente) {
     Navigator.of(context).pushNamed(
       AppRoutes.plantaLista,
       arguments: continente,
@@ -32,9 +33,9 @@ class ButtonContinentes extends StatelessWidget {
             ), // button text
             decoration: BoxDecoration(
               color: Colors.lightGreen.shade100,
-              image: DecorationImage(
+              image: pathImage.isEmpty ? null : DecorationImage(
                   image: Image.asset(
-                    "assets/images/${continente}.png",
+                    pathImage
                   ).image,
                   fit: BoxFit.fitHeight),
             )),
