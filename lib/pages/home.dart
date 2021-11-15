@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
+
   void _selectContinentes(BuildContext context) {
     Navigator.of(context).pushNamed(
       AppRoutes.continentes,
@@ -43,7 +44,8 @@ class Home extends StatelessWidget {
               margin: EdgeInsets.all(5),
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(250, 224, 199, 1)),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Color.fromRGBO(250, 224, 199, 1)),
                   elevation: MaterialStateProperty.all<double>(0),
                 ),
                 onPressed: () => _selectContinentes(context),
@@ -70,7 +72,8 @@ class Home extends StatelessWidget {
               margin: EdgeInsets.all(5),
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(250, 224, 199, 1)),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Color.fromRGBO(250, 224, 199, 1)),
                   elevation: MaterialStateProperty.all<double>(0),
                 ),
                 onPressed: () => _selectInserirPlanta(context),
