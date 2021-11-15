@@ -12,7 +12,7 @@ class Home extends StatelessWidget {
 
   void _selectInserirPlanta(BuildContext context) {
     Navigator.of(context).pushNamed(
-      AppRoutes.nova_planta,
+      AppRoutes.novaPlanta,
     );
   }
 
@@ -73,7 +73,7 @@ class Home extends StatelessWidget {
                   backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(250, 224, 199, 1)),
                   elevation: MaterialStateProperty.all<double>(0),
                 ),
-                onPressed: () => print('Inserir plantas'),
+                onPressed: () => _selectInserirPlanta(context),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

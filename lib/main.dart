@@ -1,5 +1,6 @@
 import 'package:app_plantas_aps8/pages/continentes.dart';
 import 'package:app_plantas_aps8/pages/home.dart';
+import 'package:app_plantas_aps8/pages/inserir_planta.dart';
 import 'package:app_plantas_aps8/pages/planta_info.dart';
 import 'package:app_plantas_aps8/pages/plantas_lista.dart';
 import 'package:app_plantas_aps8/utils/app_routes.dart';
@@ -71,7 +72,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
       routes: {
         AppRoutes.home: (context) => Home(),
         AppRoutes.continentes: (context) => Continentes(),
-        // AppRoutes.nova_planta: (context) => PlantaInfo(),
+        AppRoutes.novaPlanta: (context) => InserirPlanta(),
         AppRoutes.plantaLista: (context) => PlantaLista(),
         AppRoutes.plantaInfo: (context) => PlantaInfo(),
       },
