@@ -9,7 +9,7 @@ class InputText extends StatelessWidget {
 
   Widget build(BuildContext context) {
     String labelText = parametros[0];
-    TextEditingController controller = TextEditingController(text: parametros[1]);
+    TextEditingController controller = TextEditingController();
     String initalText = parametros[1];
     String isEmptyText = parametros[2];
     TextInputType keyboardType = parametros[3];
@@ -17,26 +17,32 @@ class InputText extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
       child: TextFormField(
+        textCapitalization: TextCapitalization.sentences,
         controller: controller,
         key: _formKey,
         autofocus: true,
         keyboardType: keyboardType,
         // initialValue: initalText,
         textInputAction: TextInputAction.next,
-        onTap: () {
-          if (initalText.isNotEmpty) {
-            initalText = '';
-          }
-        },
         decoration: InputDecoration(
-          hintText: 'Aloha',
-          labelText: labelText,
+          fillColor: Color.fromRGBO(250, 224, 199, 0.6),
+          filled: true,
+          focusColor: Colors.green,
+          hoverColor: Colors.yellow,
+          hintText: 'Ex: $initalText',
+          label: Text(
+            labelText,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18,
+            ),
+          ),
         ),
         validator: (value) {
-          print(controller.text);
           if (value!.isEmpty) {
             return isEmptyText;
           }
+          parametros[4] = controller.text;
           return null;
         },
       ),

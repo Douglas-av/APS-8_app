@@ -58,7 +58,7 @@ class Home extends StatelessWidget {
                         'Continentes',
                         style: TextStyle(
                           fontSize: 20,
-                          color: Colors.black,
+                          color: Colors.black54,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -86,7 +86,7 @@ class Home extends StatelessWidget {
                         'Inserir plantas',
                         style: TextStyle(
                           fontSize: 20,
-                          color: Colors.black,
+                          color: Colors.black54,
                         ),
                         textAlign: TextAlign.center,
                       ),

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:app_plantas_aps8/models/plantas_model.dart';
@@ -20,7 +21,8 @@ class PlantaService {
   }
 
   Future<List<PlantasModel>> buscaPlantasContinente(String continente) async {
-    final response = await http.get(Uri.parse(_baseURL + '/plantas/' + continente));
+    final response =
+        await http.get(Uri.parse(_baseURL + '/plantas/' + continente));
 
     if (response.statusCode == 200) {
       List<dynamic> body = jsonDecode(utf8.decode(response.bodyBytes));
@@ -29,6 +31,20 @@ class PlantaService {
       return plantas;
     } else {
       throw "Falha para buscar Plantas.";
+    }
+  }
+
+  Future<PlantasModel> postPlanta(Map parametros) async {
+    print('---$parametros');
+    final response = await http.post(Uri.parse(_baseURL + '/plantas'),
+        headers: {"Content-Type": "application/json"}, body: jsonEncode(parametros));
+    if (response.statusCode == 200) {
+      List<dynamic> body = jsonDecode(utf8.decode(response.bodyBytes));
+      List<PlantasModel> plantas =
+          body.map((dynamic item) => PlantasModel.fromJson(item)).toList();
+      return plantas.last;
+    } else {
+      throw "Falha para cadastrar Plantas.";
     }
   }
 }

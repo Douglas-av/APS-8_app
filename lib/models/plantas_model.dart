@@ -1,5 +1,4 @@
-class PlantasModel{
-
+class PlantasModel {
   final int numero;
   final String nome_popular;
   final String nome_cientifico;
@@ -11,7 +10,17 @@ class PlantasModel{
   final String altura_media;
   final String descricao;
 
-  PlantasModel(this.numero, this.nome_popular, this.nome_cientifico, this.luminosidade, this.origem, this.continente, this.familia, this.tipo, this.altura_media, this.descricao);
+  PlantasModel(
+      this.numero,
+      this.nome_popular,
+      this.nome_cientifico,
+      this.luminosidade,
+      this.origem,
+      this.continente,
+      this.familia,
+      this.tipo,
+      this.altura_media,
+      this.descricao);
 
   factory PlantasModel.fromJson(Map<String, dynamic> json) {
     return PlantasModel(
@@ -28,5 +37,19 @@ class PlantasModel{
     );
   }
 
-}
+  Map toMap() {
+    var map = new Map();
+    map["numero"] = numero;
+    map["nome_popular"] = nome_popular;
+    map["nome_cientifico"] = nome_cientifico;
+    map["luminosidade"] = luminosidade;
+    map["origem"] = origem;
+    map["continente"] = continente;
+    map["familia"] = familia;
+    map["tipo"] = tipo;
+    map["altura_media"] = altura_media;
+    map["descricao"] = descricao;
 
+    return map;
+  }
+}
