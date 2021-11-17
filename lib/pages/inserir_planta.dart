@@ -13,21 +13,36 @@ import 'package:flutter/material.dart';
 
 class InserirPlanta extends StatelessWidget {
   GlobalKey<FormState> _key = new GlobalKey();
-  Parametros parametros = new Parametros();
   PlantaService plantaService = new PlantaService();
   late PlantasModel planta;
+  bool update = false;
+  var parametros;
 
   List _inputText(Map parametros) {
     List<Widget> lista = [];
     parametros.values.forEach((value) {
-      lista.add(InputText(value));
+      lista.add(InputText(
+        parametros: value,
+        putText: this.update,
+      ));
     });
     return lista;
   }
 
+  void screenUpdate(Map parametrosPut) {
+    print('screenUpdate parametrosPut: ---$parametrosPut');
+    print('screenUpdate parametros: **---${parametros.parametrosExemplo['nome_popular']}');
+    parametrosPut.forEach((key, value) {
+      this.parametros.parametrosExemplo[key][1] = value;
+      this.parametros.parametrosExemplo[key][5] = true;
+    });
+  }
+
+  InserirPlanta({required this.parametros, this.update = false});
+
   Map _postParametros(Map post) {
     Map<String, dynamic> parametros = {
-      "numero": 0,
+      "numero": 11,
       "nome_popular": 0,
       "nome_cientifico": 0,
       "luminosidade": 0,
@@ -39,13 +54,23 @@ class InserirPlanta extends StatelessWidget {
       "descricao": 0,
     };
     post.forEach((key, value) {
-      parametros[key] = post[key][4];
+      if (key == 'numero') {
+        parametros[key] = int.parse(post[key][4]);
+      } else {
+        parametros[key] = post[key][4];
+      }
     });
     return parametros;
   }
 
   @override
   Widget build(BuildContext context) {
+    try {
+      final Map parametrosPut =
+          ModalRoute.of(context)!.settings.arguments as Map;
+      screenUpdate(parametrosPut);
+    } catch (e) {}
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Inserir/Alterar Planta"),
@@ -54,79 +79,155 @@ class InserirPlanta extends StatelessWidget {
       body: Form(
         key: _key,
         child: Container(
-          child: Scrollbar(
-            showTrackOnHover: true,
-            child: ListView(
+          child: SingleChildScrollView(
+            child: Column(
               children: [
                 ..._inputText(parametros.parametrosExemplo),
-                Container(
-                  padding: EdgeInsets.all(15),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Color.fromRGBO(250, 224, 199, 1)),
-                      elevation: MaterialStateProperty.all<double>(5),
-                      side: MaterialStateProperty.all(
-                        BorderSide.lerp(
-                            BorderSide(
-                              style: BorderStyle.solid,
-                              color: Colors.black54,
-                              width: 2.0,
-                            ),
-                            BorderSide(
-                              style: BorderStyle.solid,
-                              color: Color(0xffe4e978),
-                              width: 2.0,
-                            ),
-                            2.0),
-                      ),
-                    ),
-                    onPressed: () {
-                      // Validate returns true if the form is valid, or false otherwise.
-                      if (_key.currentState!.validate()) {
-                        // If the form is valid, display a snackbar. In the real world,
-                        // you'd often call a server or save the information in a database.
-                        _key.currentState!.save();
-                        Map dadosInput =
-                            _postParametros(parametros.parametrosExemplo);
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                          content: Text(
-                            'Processando informação...',
-                            textAlign: TextAlign.center,
+                Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(15),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Color.fromRGBO(250, 224, 199, 1)),
+                          elevation: MaterialStateProperty.all<double>(5),
+                          side: MaterialStateProperty.all(
+                            BorderSide.lerp(
+                                BorderSide(
+                                  style: BorderStyle.solid,
+                                  color: Colors.black54,
+                                  width: 2.0,
+                                ),
+                                BorderSide(
+                                  style: BorderStyle.solid,
+                                  color: Color(0xffe4e978),
+                                  width: 2.0,
+                                ),
+                                2.0),
                           ),
-                          duration: Duration(milliseconds: 1500),
-                        ));
-                        try {
-                          plantaService.postPlanta(dadosInput).then((value) {
+                        ),
+                        onPressed: () {
+                          // Validate returns true if the form is valid, or false otherwise.
+                          if (_key.currentState!.validate()) {
+                            // If the form is valid, display a snackbar. In the real world,
+                            // you'd often call a server or save the information in a database.
+                            _key.currentState!.save();
+                            Map dadosInput =
+                                _postParametros(parametros.parametrosExemplo);
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
                               content: Text(
-                                'Informação inserida com sucesso!',
+                                'Processando informação...',
                                 textAlign: TextAlign.center,
                               ),
-                              backgroundColor: Colors.green,
-                              duration: Duration(milliseconds: 3500),
+                              duration: Duration(milliseconds: 1500),
                             ));
-                          });
-                        } catch (e) {
-                          print(e);
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
-                            content: Text(
-                              'Erro ao inserir a informação.',
-                              textAlign: TextAlign.center,
-                            ),
-                            backgroundColor: Colors.red,
-                            duration: Duration(milliseconds: 3500),
-                          ));
-                        }
-                      }
-                      print('oi');
-                    },
-                    child:
-                        Text('Enviar', style: TextStyle(color: Colors.black54)),
-                  ),
+                            try {
+                              plantaService
+                                  .postPlanta(dadosInput)
+                                  .then((value) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text(
+                                    'Informação inserida com sucesso!',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  backgroundColor: Colors.green,
+                                  duration: Duration(milliseconds: 3500),
+                                ));
+                              });
+                            } catch (e) {
+                              print(e);
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text(
+                                  'Erro ao inserir a informação.',
+                                  textAlign: TextAlign.center,
+                                ),
+                                backgroundColor: Colors.red,
+                                duration: Duration(milliseconds: 3500),
+                              ));
+                            }
+                          }
+                          print('oi');
+                        },
+                        child: Text('Cadastrar nova planta',
+                            style: TextStyle(color: Colors.black54)),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(15),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Color.fromRGBO(250, 224, 199, 1)),
+                          elevation: MaterialStateProperty.all<double>(5),
+                          side: MaterialStateProperty.all(
+                            BorderSide.lerp(
+                                BorderSide(
+                                  style: BorderStyle.solid,
+                                  color: Colors.black54,
+                                  width: 2.0,
+                                ),
+                                BorderSide(
+                                  style: BorderStyle.solid,
+                                  color: Color(0xffe4e978),
+                                  width: 2.0,
+                                ),
+                                2.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          // Validate returns true if the form is valid, or false otherwise.
+                          if (_key.currentState!.validate()) {
+                            // If the form is valid, display a snackbar. In the real world,
+                            // you'd often call a server or save the information in a database.
+                            _key.currentState!.save();
+                            Map dadosInput =
+                                _postParametros(parametros.parametrosExemplo);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text(
+                                'Processando informação...',
+                                textAlign: TextAlign.center,
+                              ),
+                              duration: Duration(milliseconds: 1500),
+                            ));
+                            try {
+                              plantaService
+                                  .postPlanta(dadosInput)
+                                  .then((value) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text(
+                                    'Informação inserida com sucesso!',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  backgroundColor: Colors.green,
+                                  duration: Duration(milliseconds: 3500),
+                                ));
+                              });
+                            } catch (e) {
+                              print(e);
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text(
+                                  'Erro ao inserir a informação.',
+                                  textAlign: TextAlign.center,
+                                ),
+                                backgroundColor: Colors.red,
+                                duration: Duration(milliseconds: 3500),
+                              ));
+                            }
+                          }
+                          print('oi');
+                        },
+                        child: Text('Alterar planta existente',
+                            style: TextStyle(color: Colors.black54)),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

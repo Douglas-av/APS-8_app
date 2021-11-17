@@ -1,3 +1,4 @@
+import 'package:app_plantas_aps8/api_gateway/plantas_service.dart';
 import 'package:app_plantas_aps8/components/type_tag.dart';
 import 'package:app_plantas_aps8/models/plantas_model.dart';
 import 'package:app_plantas_aps8/utils/app_config.dart';
@@ -5,8 +6,9 @@ import 'package:flutter/material.dart';
 
 class PlantaInfo extends StatelessWidget {
   final double fontSizeFloatingText = 14;
+  PlantaService _plantaService = PlantaService();
 
-  const PlantaInfo({Key? key}) : super(key: key);
+  PlantaInfo({Key? key}) : super(key: key);
 
   List<TypeTag> getTypeTags(PlantasModel planta) {
     List<TypeTag> typeTags = [];
@@ -27,10 +29,19 @@ class PlantaInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final PlantasModel planta = ModalRoute.of(context)!.settings.arguments as PlantasModel;
+    final PlantasModel planta =
+        ModalRoute.of(context)!.settings.arguments as PlantasModel;
 
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(Icons.delete_sharp),
+            onPressed: () {
+              _plantaService.deletePlanta(125);
+            },
+          ),
+        ],
         backgroundColor: Colors.green.shade900,
         title: Text(
           planta.familia,

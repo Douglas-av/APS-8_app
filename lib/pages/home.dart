@@ -40,7 +40,7 @@ class Home extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
             ),
             Container(
-              width: MediaQuery.of(context).size.width * 0.5,
+              width: MediaQuery.of(context).size.width * 0.6,
               margin: EdgeInsets.all(5),
               child: ElevatedButton(
                 style: ButtonStyle(
@@ -68,7 +68,7 @@ class Home extends StatelessWidget {
               ),
             ),
             Container(
-              width: MediaQuery.of(context).size.width * 0.5,
+              width: MediaQuery.of(context).size.width * 0.6,
               margin: EdgeInsets.all(5),
               child: ElevatedButton(
                 style: ButtonStyle(
@@ -83,7 +83,7 @@ class Home extends StatelessWidget {
                     Container(
                       alignment: Alignment.center,
                       child: Text(
-                        'Inserir plantas',
+                        'Inserir/Alterar plantas',
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.black54,

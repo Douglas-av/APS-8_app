@@ -15,12 +15,21 @@ class Parametros {
   };
 
   Map parametrosExemplo = {
+    'numero':[
+      'Numero',
+      '10 (0 para nova planta)',
+      'Informar o numero da planta.',
+      TextInputType.number,
+      TextEditingController,
+      false,
+    ],
     'nome_popular': [
       'Nome popular',
       'Pata de vaca',
       'Informar o nome da planta',
       TextInputType.text,
       TextEditingController,
+      false,
     ],
     'nome_cientifico': [
       'Nome científico',
@@ -28,6 +37,7 @@ class Parametros {
       'Informar o nome científico da planta',
       TextInputType.text,
       TextEditingController,
+      false,
     ],
     'luminosidade': [
       'Luminosidade',
@@ -35,6 +45,7 @@ class Parametros {
       'Informar a luminosidade da planta',
       TextInputType.text,
       TextEditingController,
+      false,
     ],
     'origem': [
       'Origem',
@@ -42,6 +53,7 @@ class Parametros {
       'Informar a origem da planta',
       TextInputType.text,
       TextEditingController,
+      false,
     ],
     'continente': [
       'Continente',
@@ -49,6 +61,7 @@ class Parametros {
       'Informar o continente da planta',
       TextInputType.text,
       TextEditingController,
+      false,
     ],
     'familia': [
       'Família',
@@ -56,6 +69,7 @@ class Parametros {
       'Informar a família da planta',
       TextInputType.text,
       TextEditingController,
+      false,
     ],
     'tipo': [
       'Tipo',
@@ -63,6 +77,7 @@ class Parametros {
       'Informar o tipo da planta',
       TextInputType.text,
       TextEditingController,
+      false,
     ],
     'altura_media': [
       'Altura média',
@@ -70,6 +85,7 @@ class Parametros {
       'Informar a altura média da planta',
       TextInputType.text,
       TextEditingController,
+      false,
     ],
     'descricao': [
       'Descrição',
@@ -78,6 +94,7 @@ class Parametros {
       'Informar a descrição da planta',
       TextInputType.text,
       TextEditingController,
+      false,
     ],
   };
 }
