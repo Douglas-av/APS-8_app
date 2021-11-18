@@ -44,8 +44,9 @@ class InputText extends StatelessWidget {
             if (!focus && labelText == 'Numero' && controller.text != '0')
               {
                 _inputTextUpdate(
-                    await plantaService.buscaPlantaId(controller.text),
-                    context),
+                  await plantaService.buscaPlantaId(controller.text),
+                  context,
+                ),
               }
             else
               {null}
