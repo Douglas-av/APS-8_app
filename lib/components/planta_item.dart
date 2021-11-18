@@ -12,7 +12,7 @@ class PlantaItem extends StatelessWidget {
   const PlantaItem(this.planta, {Key? key}) : super(key: key);
 
   void _selectPlanta(BuildContext context) {
-    Navigator.of(context).pushNamed(
+    Navigator.of(context).pushReplacementNamed(
       AppRoutes.plantaInfo,
       arguments: planta,
     );

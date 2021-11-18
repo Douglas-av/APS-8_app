@@ -65,18 +65,21 @@ class PlantaService {
     }
   }
 
-  Future<PlantasModel> putPlanta(Map parametros) async {
+  Future<bool> putPlanta(Map parametros, int id) async {
     print('---$parametros');
-    final response = await http.put(Uri.parse(_baseURL + '/plantas/'),
+    final response = await http.put(Uri.parse(_baseURL + '/plantas/' + id.toString()),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(parametros));
 
     if (response.statusCode == 200) {
-      List<dynamic> body = jsonDecode(utf8.decode(response.bodyBytes));
-      List<PlantasModel> plantas =
-          body.map((dynamic item) => PlantasModel.fromJson(item)).toList();
-      return plantas.last;
+      // List<dynamic> body = jsonDecode(utf8.decode(response.bodyBytes));
+      // List<PlantasModel> plantas =
+          // body.map((dynamic item) => PlantasModel.fromJson(item)).toList();
+      // return plantas.last;
+
+      return true;
     } else {
+      return false;
       throw "Falha para atualizar Planta.";
     }
   }

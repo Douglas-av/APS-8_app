@@ -2,6 +2,7 @@ import 'package:app_plantas_aps8/api_gateway/plantas_service.dart';
 import 'package:app_plantas_aps8/components/type_tag.dart';
 import 'package:app_plantas_aps8/models/plantas_model.dart';
 import 'package:app_plantas_aps8/utils/app_config.dart';
+import 'package:app_plantas_aps8/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class PlantaInfo extends StatelessWidget {
@@ -38,7 +39,11 @@ class PlantaInfo extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.delete_sharp),
             onPressed: () {
-              _plantaService.deletePlanta(125);
+              _plantaService.deletePlanta(planta.numero);
+              Navigator.of(context).pushReplacementNamed(
+                AppRoutes.plantaLista,
+                arguments: planta.continente,
+              );
             },
           ),
         ],
@@ -66,8 +71,21 @@ class PlantaInfo extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(10),
               child: Image.network(
-                AppConfig.apiBaseURL + '/imagem/' + planta.numero.toString(),
-              ),
+                  AppConfig.apiBaseURL + '/imagem/' + planta.numero.toString(),
+                  errorBuilder: (BuildContext context, Object exception,
+                      StackTrace? stackTrace) {
+                // Appropriate logging or analytics, e.g.
+                // myAnalytics.recordError(
+                //   'An error occurred loading "https://example.does.not.exist/image.jpg"',
+                //   exception,
+                //   stackTrace,
+                // );
+                return const Text(
+                  'NO IMAGE!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 26),
+                );
+              }),
               decoration: BoxDecoration(
                 color: Colors.green[900],
                 borderRadius: const BorderRadius.only(

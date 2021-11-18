@@ -13,10 +13,10 @@ class Continentes extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.lightGreen.shade900,
           title: Container(
-            width: double.infinity,
+            width: 200,
             margin: EdgeInsets.all(28),
             child: Text(
-              "Flora Global",
+              "Flora",
               style: TextStyle(fontSize: 28, color: Colors.white),
               textAlign: TextAlign.center,
             ),

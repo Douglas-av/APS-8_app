@@ -121,7 +121,7 @@ class InserirPlanta extends StatelessWidget {
                                 'Processando informação...',
                                 textAlign: TextAlign.center,
                               ),
-                              duration: Duration(milliseconds: 1500),
+                              duration: Duration(milliseconds: 1000),
                             ));
                             try {
                               plantaService
@@ -134,7 +134,7 @@ class InserirPlanta extends StatelessWidget {
                                     textAlign: TextAlign.center,
                                   ),
                                   backgroundColor: Colors.green,
-                                  duration: Duration(milliseconds: 3500),
+                                  duration: Duration(milliseconds: 2500),
                                 ));
                               });
                             } catch (e) {
@@ -146,7 +146,7 @@ class InserirPlanta extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                 ),
                                 backgroundColor: Colors.red,
-                                duration: Duration(milliseconds: 3500),
+                                duration: Duration(milliseconds: 2500),
                               ));
                             }
                           }
@@ -192,11 +192,12 @@ class InserirPlanta extends StatelessWidget {
                                 'Processando informação...',
                                 textAlign: TextAlign.center,
                               ),
-                              duration: Duration(milliseconds: 1500),
+                              duration: Duration(milliseconds: 1000),
                             ));
                             try {
+                              print('Input metodo PUT: ---** $dadosInput');
                               plantaService
-                                  .postPlanta(dadosInput)
+                                  .putPlanta(dadosInput, dadosInput['numero'])
                                   .then((value) {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(const SnackBar(
@@ -205,7 +206,7 @@ class InserirPlanta extends StatelessWidget {
                                     textAlign: TextAlign.center,
                                   ),
                                   backgroundColor: Colors.green,
-                                  duration: Duration(milliseconds: 3500),
+                                  duration: Duration(milliseconds: 2500),
                                 ));
                               });
                             } catch (e) {
@@ -217,7 +218,7 @@ class InserirPlanta extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                 ),
                                 backgroundColor: Colors.red,
-                                duration: Duration(milliseconds: 3500),
+                                duration: Duration(milliseconds: 2500),
                               ));
                             }
                           }
